@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Ticket Woodcraft Strategy: Philippines 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Font Awesome (for icons, using CDN as requested instead of SVG) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 
+    Palette Selection: "Tropical Luxury"
+    Based on the "Sea Wave" and "Island Rough" table images provided.
+    Colors: 
+    - Deep Wood: #3E2723 (Rich Brown)
+    - Ocean Resin: #00BCD4 (Vibrant Cyan)
+    - Dark Teal: #006064 (Deep Teal)
+    - Gold Accent: #FFD700 (Luxury)
+    - Background: #F5F5F5 (Clean White/Grey)
+    -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepwood: '#3E2723',
+                        ocean: '#00BCD4',
+                        darkteal: '#006064',
+                        luxury: '#FFD700',
+                        offwhite: '#F5F5F5',
+                        surface: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #006064;
+            border-radius: 4px;
+        }
+        
+        body {
+            background-color: #F5F5F5;
+            color: #333;
+        }
+    </style>
+    <!-- 
+    PLAN NARRATIVE & STRUCTURE:
+    1. Introduction: Hook the user with the 200K goal and the "High Ticket" concept.
+    2. The Contenders: Compare the types of tables uploaded (Rough, Clean, Resin) to find the best fit for FB Ads.
+    3. The Winner: Declare the "Epoxy River Table" as the champion due to "Virality" and "Perceived Value".
+    4. Unit Economics: Breakdown how to hit 200K (Price vs. Cost vs. Profit).
+    5. Target Audience: Define the Filipino "Class A/B" buyer.
+    6. Marketing Funnel: How to sell it on Shopify using the "Stop the Scroll" method.
+    -->
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Hero Section -->
+    <header class="bg-deepwood text-white py-12 px-4 shadow-lg border-b-4 border-luxury">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold font-serif mb-4 text-luxury">The ₱200K/Month Blueprint</h1>
+            <h2 class="text-xl md:text-2xl text-ocean font-light">High-Ticket Woodcraft Strategy: Philippines Market Analysis</h2>
+            <p class="mt-4 max-w-2xl mx-auto text-gray-300">
+                A deep-dive research analysis on dominating the "Low Volume, High Income" furniture industry using Shopify & Facebook Ads.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto p-6 space-y-12">
+
+        <!-- SECTION 1: The Objective -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white rounded-lg shadow-md p-8 border-l-8 border-ocean">
+            <div class="space-y-4">
+                <h3 class="text-2xl font-bold text-deepwood border-b-2 border-luxury inline-block pb-1">The Objective</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    To generate a consistent <strong>₱200,000+ monthly income</strong> in the Philippines with minimal operational headache, we must abandon the "commodity" mindset. Selling cheap items requires thousands of transactions. Selling <strong>High-Ticket Art</strong> requires only a handful.
+                </p>
+                <div class="flex items-center space-x-4 mt-4">
+                    <div class="p-4 bg-gray-100 rounded-lg text-center w-full">
+                        <span class="block text-sm text-gray-500 uppercase tracking-wide">Monthly Revenue Goal</span>
+                        <span class="block text-4xl font-extrabold text-darkteal">₱200,000+</span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 italic mt-2">
+                    *Based on a 40-50% profit margin model, this requires selling just <strong>4-6 premium units</strong> per month.
+                </p>
+            </div>
+            
+            <!-- Visualization: Goal Breakdown (Donut) -->
+            <!-- Data Point: Revenue Composition -> Goal: Inform -> Vis: Donut Chart -> Chart.js (NO SVG) -->
+            <div class="flex flex-col items-center">
+                <h4 class="text-lg font-semibold text-deepwood mb-4">Monthly Sales Volume Required</h4>
+                <div class="chart-container">
+                    <canvas id="volumeChart"></canvas>
+                </div>
+                <p class="text-xs text-center text-gray-500 mt-2">Comparison: High Ticket vs. Low Ticket effort</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Product Analysis (The Contenders) -->
+        <section class="space-y-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h3 class="text-3xl font-bold text-deepwood">Analyzing Your Inventory</h3>
+                <p class="text-gray-600 mt-2">
+                    We analyzed the images provided (Rough Slabs, Clean Cut, Sea Wave, Infinite Circle). For Facebook Ads, "Attention" is the currency. We scored these styles on three critical metrics for the PH market.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Analysis Card -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h4 class="text-xl font-bold text-darkteal mb-4">The Competitors</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-gray-200 text-deepwood rounded-full font-bold mr-3">1</span>
+                            <div>
+                                <strong class="text-deepwood">Rustic Live Edge (The "Rough" Tables):</strong>
+                                <p class="text-sm text-gray-600">Beautiful and classic. However, the market is flooded with "budget" rustic options. Harder to differentiate on FB Ads without massive size.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-gray-200 text-deepwood rounded-full font-bold mr-3">2</span>
+                            <div>
+                                <strong class="text-deepwood">Modern Minimalist (The "Clean Cut"):</strong>
+                                <p class="text-sm text-gray-600">Functional but often perceived as "IKEA style" unless branding is ultra-luxury. Lower perceived value per photo pixel.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-luxury text-deepwood rounded-full font-bold mr-3">3</span>
+                            <div>
+                                <strong class="text-deepwood">Epoxy Resin Hybrid (The "Sea Wave"):</strong>
+                                <p class="text-sm text-gray-600">The "River Table". High visual contrast. Looks like art. Commands the highest price tag and stops the scroll on social media instantly.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Visualization: Radar Chart Comparison -->
+                <!-- Data Point: Product Attributes -> Goal: Compare -> Vis: Radar Chart -> Chart.js (NO SVG) -->
+                <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
+                    <h4 class="text-lg font-semibold text-deepwood mb-2">Market Viability Score</h4>
+                    <div class="chart-container">
+                        <canvas id="radarAnalysis"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Scores based on PH Luxury Market & FB Ad Performance metrics.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: The Winner -->
+        <section class="bg-deepwood rounded-xl shadow-2xl overflow-hidden text-white relative">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-ocean opacity-10 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
+                <div class="p-8 md:col-span-7 flex flex-col justify-center space-y-6">
+                    <div class="inline-block px-3 py-1 bg-luxury text-deepwood font-bold text-xs uppercase tracking-wider rounded-sm w-max">The Winning Product</div>
+                    <h2 class="text-4xl font-serif font-bold text-white leading-tight">The "Ocean Fusion" Resin Table</h2>
+                    <p class="text-gray-300 text-lg">
+                        Based on your "Sea Wave" and "Island Rough" images, this is the <strong>Best Product</strong> to sell. 
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-ocean"></i>
+                            <span><strong>High Virality:</strong> Resin colors (Blues/Teals) pop on mobile screens.</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-ocean"></i>
+                            <span><strong>Status Symbol:</strong> Owned by BGC/Makati condo owners as "Statement Pieces".</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-ocean"></i>
+                            <span><strong>Price Elasticity:</strong> Hard to price-check. You can charge ₱50k-₱80k easily.</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Visual Representation using CSS/HTML (No Images/SVG) -->
+                <div class="md:col-span-5 bg-gray-900 p-8 flex items-center justify-center relative overflow-hidden">
+                    <!-- Abstract CSS Art representing a River Table -->
+                    <div class="w-48 h-64 bg-yellow-900 rounded-lg relative shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500 border-4 border-gray-800">
+                        <!-- Wood Left -->
+                        <div class="absolute left-0 top-0 bottom-0 w-1/3 bg-yellow-800 border-r border-yellow-900 z-10"></div>
+                        <!-- River Center -->
+                        <div class="absolute left-1/3 right-1/3 top-0 bottom-0 bg-cyan-500 opacity-90 animate-pulse z-0"></div>
+                        <!-- Wood Right -->
+                        <div class="absolute right-0 top-0 bottom-0 w-1/3 bg-yellow-800 border-l border-yellow-900 z-10"></div>
+                        <!-- Gloss Effect -->
+                        <div class="absolute inset-0 bg-white opacity-10 bg-gradient-to-tr from-transparent to-white rounded-lg z-20"></div>
+                    </div>
+                    <div class="absolute bottom-6 text-center w-full">
+                        <span class="text-luxury font-serif italic">Est. Price: ₱65,000+</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Unit Economics (The Math) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Text Explanation -->
+            <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-darkteal">
+                <h3 class="text-2xl font-bold text-deepwood mb-4">The "200K" Math</h3>
+                <p class="text-gray-600 mb-6">
+                    To hit ₱200,000 profit (or high revenue), you don't need volume. You need margins. Here is the breakdown of a single 6-seater Dining River Table sale.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+                        <span class="text-gray-600">Sales Price</span>
+                        <span class="font-bold text-deepwood text-lg">₱65,000</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-2 text-sm text-red-500">
+                        <span>COGS (Wood + Resin + Legs)</span>
+                        <span>- ₱20,000</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-2 text-sm text-red-500">
+                        <span>Labor & Finishing</span>
+                        <span>- ₱10,000</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-2 text-sm text-orange-500">
+                        <span>Customer Acquisition (FB Ads)</span>
+                        <span>- ₱8,000</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-2 bg-green-50 p-2 rounded">
+                        <span class="font-bold text-green-800">Net Profit Per Unit</span>
+                        <span class="font-bold text-green-600 text-xl">₱27,000</span>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <p class="text-sm font-semibold text-deepwood">
+                        Units needed for ₱200k Profit: <span class="text-ocean text-lg">~7.4 Tables</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Visualization: Unit Economics (Stacked Bar) -->
+            <!-- Data Point: Cost Breakdown -> Goal: Inform/Compare -> Vis: Stacked Bar -> Chart.js (NO SVG) -->
+            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+                <h4 class="text-lg font-semibold text-deepwood mb-4">Revenue Breakdown per Unit</h4>
+                <div class="chart-container">
+                    <canvas id="economicsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Target Audience (Who Buys?) -->
+        <section class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-2xl font-bold text-deepwood mb-6 text-center">Identifying the "High Roller" Client</h3>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">
+                You are not targeting the average household. You are targeting the top 5-10% of the Philippines.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Profile 1 -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                    <div class="text-ocean text-3xl mb-4 text-center"><i class="fa-solid fa-building"></i></div>
+                    <h4 class="font-bold text-center text-deepwood">The "BGC/Makati" Professional</h4>
+                    <p class="text-xs text-gray-500 text-center mt-2">Age 28-40. Earns 150k+. Lives in a condo. Wants furniture that looks good on Instagram stories.</p>
+                </div>
+                <!-- Profile 2 -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow bg-gray-50">
+                    <div class="text-luxury text-3xl mb-4 text-center"><i class="fa-solid fa-plane-departure"></i></div>
+                    <h4 class="font-bold text-center text-deepwood">The Returning OFW / Expat</h4>
+                    <p class="text-xs text-gray-500 text-center mt-2">Building a retirement home in the province (Cavite/Laguna/Cebu). Has cash upfront. Values durability and "solid wood".</p>
+                </div>
+                <!-- Profile 3 -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                    <div class="text-darkteal text-3xl mb-4 text-center"><i class="fa-solid fa-store"></i></div>
+                    <h4 class="font-bold text-center text-deepwood">Commercial Owners</h4>
+                    <p class="text-xs text-gray-500 text-center mt-2">Coffee shop owners, Boutique hotels, Modern offices. They need statement tables for their lobbies. High budget.</p>
+                </div>
+            </div>
+
+            <!-- Visualization: Demographic Pyramid (HTML/CSS) -->
+            <!-- Data Point: SES Distribution -> Goal: Organize -> Vis: Pyramid Diagram -> HTML/CSS (NO SVG) -->
+            <div class="mt-12 flex justify-center">
+                <div class="relative w-full max-w-md">
+                    <div class="text-center mb-4 font-bold text-gray-400">Target Market Pyramid</div>
+                    <!-- Class A -->
+                    <div class="mx-auto w-1/4 bg-deepwood text-luxury p-2 text-center text-xs font-bold rounded-t-lg">Class A (High Priority)</div>
+                    <!-- Class B -->
+                    <div class="mx-auto w-2/4 bg-darkteal text-white p-2 text-center text-xs font-bold border-t border-white">Class B (Core Market)</div>
+                    <!-- Class C -->
+                    <div class="mx-auto w-3/4 bg-gray-300 text-gray-600 p-2 text-center text-xs border-t border-white">Class C (Avoid - Low Budget)</div>
+                    <!-- Class D/E -->
+                    <div class="mx-auto w-full bg-gray-200 text-gray-400 p-2 text-center text-xs rounded-b-lg border-t border-white">Class D/E (Not Qualified)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: The Marketing Funnel -->
+        <section class="space-y-6">
+            <h3 class="text-2xl font-bold text-deepwood text-center">The Shopify & FB Ads Funnel</h3>
+            <p class="text-center text-gray-600 mb-8">How to turn a scroller into a ₱65k buyer.</p>
+            
+            <!-- Flowchart using Grid/Flex (NO MERMAID) -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                <!-- Step 1 -->
+                <div class="relative p-4 bg-white rounded shadow border-t-4 border-ocean">
+                    <div class="font-bold text-ocean mb-2">1. The "Hook" Ad</div>
+                    <p class="text-xs text-gray-600">Video Ad: Slow motion pour of epoxy resin. Close up of wood grain. High contrast.</p>
+                    <div class="hidden md:block absolute top-1/2 -right-4 text-gray-300 transform -translate-y-1/2 z-10"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <!-- Step 2 -->
+                <div class="relative p-4 bg-white rounded shadow border-t-4 border-ocean">
+                    <div class="font-bold text-ocean mb-2">2. Shopify Product Page</div>
+                    <p class="text-xs text-gray-600">High-Res Gallery. "One of a kind" badging. "Free Delivery within Metro Manila" offer.</p>
+                    <div class="hidden md:block absolute top-1/2 -right-4 text-gray-300 transform -translate-y-1/2 z-10"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <!-- Step 3 -->
+                <div class="relative p-4 bg-white rounded shadow border-t-4 border-ocean">
+                    <div class="font-bold text-ocean mb-2">3. The Inquiry (Chat)</div>
+                    <p class="text-xs text-gray-600">High ticket items rarely sell on "Click". They message first. Use FB Messenger channel.</p>
+                    <div class="hidden md:block absolute top-1/2 -right-4 text-gray-300 transform -translate-y-1/2 z-10"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <!-- Step 4 -->
+                <div class="relative p-4 bg-deepwood rounded shadow border-t-4 border-luxury">
+                    <div class="font-bold text-luxury mb-2">4. Conversion</div>
+                    <p class="text-xs text-gray-300">50% Downpayment via Bank Transfer/GCash to secure the custom piece.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: Projected Growth (Plotly) -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12">
+            <h3 class="text-2xl font-bold text-deepwood mb-4">Revenue Projection (6 Months)</h3>
+            <p class="text-sm text-gray-600 mb-4">Assuming a conservative start with reinvestment into Ads.</p>
+            <!-- Visualization: Line Chart using Plotly -->
+            <!-- Data Point: Growth over time -> Goal: Change -> Vis: Line Area Chart -> Plotly (Canvas Mode) -->
+            <div class="chart-container" style="max-width: 100%;">
+                <div id="projectionChart" style="width: 100%; height: 100%;"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <p class="text-sm opacity-50">&copy; 2026 High-Ticket Woodcraft Research. Generated for Strategic Planning.</p>
+    </footer>
+
+    <!-- SCRIPTS FOR CHARTS -->
+    <script>
+        // --- UTILITY: Wrap Labels for Chart.js ---
+        function wrapLabel(str, maxChars) {
+            if (str.length <= maxChars) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxChars) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- GLOBAL CHART CONFIG ---
+        const commonTooltip = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const colors = {
+            deepwood: '#3E2723',
+            ocean: '#00BCD4',
+            darkteal: '#006064',
+            luxury: '#FFD700',
+            bg: '#F5F5F5'
+        };
+
+        // --- CHART 1: Volume vs Effort (Donut) ---
+        const ctxVolume = document.getElementById('volumeChart').getContext('2d');
+        new Chart(ctxVolume, {
+            type: 'doughnut',
+            data: {
+                labels: wrapLabel('High Ticket Tables (₱65k ea) vs Low Ticket Decor (₱500 ea)', 20),
+                datasets: [{
+                    data: [5, 400], // 5 tables vs 400 items to make 200k sales (approx)
+                    backgroundColor: [colors.ocean, '#e0e0e0'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { size: 10 } } },
+                    tooltip: commonTooltip,
+                    title: { display: true, text: 'Items sold to reach ₱200k Sales' }
+                }
+            }
+        });
+
+        // --- CHART 2: Radar Analysis (Radar) ---
+        const ctxRadar = document.getElementById('radarAnalysis').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: [
+                    'FB Viral Potential', 
+                    'Price Command', 
+                    'Ease of Shipping', 
+                    'Unique Factor', 
+                    'Market Demand'
+                ].map(l => wrapLabel(l, 16)),
+                datasets: [{
+                    label: 'Epoxy River Table (Winner)',
+                    data: [95, 90, 60, 95, 85],
+                    fill: true,
+                    backgroundColor: 'rgba(0, 188, 212, 0.2)',
+                    borderColor: colors.ocean,
+                    pointBackgroundColor: colors.ocean,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: colors.ocean
+                }, {
+                    label: 'Standard Rustic Slab',
+                    data: [60, 75, 50, 60, 80],
+                    fill: true,
+                    backgroundColor: 'rgba(62, 39, 35, 0.2)',
+                    borderColor: colors.deepwood,
+                    pointBackgroundColor: colors.deepwood,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: colors.deepwood
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#ddd' },
+                        grid: { color: '#eee' },
+                        pointLabels: { font: { size: 11 } },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    tooltip: commonTooltip,
+                    legend: { position: 'top', labels: { font: { size: 10 } } }
+                }
+            }
+        });
+
+        // --- CHART 3: Economics (Stacked Bar) ---
+        const ctxEcon = document.getElementById('economicsChart').getContext('2d');
+        new Chart(ctxEcon, {
+            type: 'bar',
+            data: {
+                labels: ['Product Costs Breakdown'],
+                datasets: [
+                    { label: 'Materials & Labor', data: [30000], backgroundColor: '#ef5350' }, // Red
+                    { label: 'Ad Spend (CPA)', data: [8000], backgroundColor: '#ffa726' }, // Orange
+                    { label: 'NET PROFIT', data: [27000], backgroundColor: '#66bb6a' } // Green
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, beginAtZero: true, ticks: { callback: function(value) { return '₱' + value/1000 + 'k'; } } }
+                },
+                plugins: {
+                    tooltip: commonTooltip,
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // --- CHART 4: Projection (Plotly - Canvas) ---
+        // Simulating 6 months of growth: Month 1 (Setup), Month 2 (First Sales), Month 3-6 (Scaling)
+        const trace1 = {
+            x: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+            y: [0, 65000, 130000, 195000, 260000, 325000],
+            type: 'scatter',
+            mode: 'lines+markers',
+            fill: 'tozeroy',
+            name: 'Projected Revenue',
+            line: {color: colors.ocean, width: 3},
+            marker: {size: 8, color: colors.darkteal}
+        };
+
+        const trace2 = {
+            x: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+            y: [0, 27000, 54000, 81000, 108000, 135000],
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Projected Net Profit',
+            line: {color: colors.luxury, width: 2, dash: 'dot'}
+        };
+
+        const layout = {
+            title: '6-Month Revenue Trajectory',
+            font: {family: 'Inter, sans-serif'},
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            margin: {l: 50, r: 20, t: 40, b: 40},
+            showlegend: true,
+            legend: {orientation: 'h', y: -0.2},
+            xaxis: {showgrid: false},
+            yaxis: {gridcolor: '#eee', title: 'PHP'}
+        };
+        
+        // Force Plotly to use Canvas/SVG safe modes (standard Scatter is SVG/Canvas hybrid, robust)
+        Plotly.newPlot('projectionChart', [trace1, trace2], layout, {responsive: true, displayModeBar: false});
+
+    </script>
+</body>
+</html>
